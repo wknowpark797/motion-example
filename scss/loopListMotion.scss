@@ -1,0 +1,130 @@
+@import 'reset';
+
+$initPos: 40%;
+$width: 15vw;
+$length: 8;
+
+main {
+	width: 100%;
+	height: 100vh;
+	background: #111;
+	position: relative;
+	overflow: hidden;
+
+	.list {
+		li {
+			width: $width;
+			height: 40vh;
+			position: absolute;
+			top: 40%;
+			left: $initPos;
+			z-index: 3;
+			padding: 20px;
+			transition: 1s;
+
+			.inner {
+				width: 100%;
+				height: 100%;
+				background: #333;
+				padding: 20px;
+				border-radius: 15px;
+				box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+				overflow: hidden;
+				display: flex;
+				align-items: center;
+				transition: 1s;
+
+				h2 {
+					font: bold 20px/1;
+					color: #888;
+					letter-spacing: 1px;
+					transition: 0.5s 0.5s;
+
+					&::before {
+						content: '';
+						display: block;
+						width: 20px;
+						height: 3px;
+						background: #888;
+						margin-bottom: 10px;
+						transition: 0.5s;
+					}
+				}
+			}
+
+			&:nth-of-type(1) {
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				opacity: 0;
+				z-index: 1;
+				transform: scale(2);
+			}
+			&:nth-of-type(2) {
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				z-index: 2;
+				transform: scale(1);
+
+				.inner {
+					background: #222;
+					box-shadow: none;
+					border-radius: 0;
+					padding: 5vw;
+
+					h2 {
+						font-size: 8vw;
+						color: #fff;
+
+						&::before {
+							width: 6vw;
+							height: 6px;
+							background: #fff;
+							margin-bottom: 20px;
+						}
+					}
+				}
+			}
+
+			@for $i from 3 through $length {
+				&:nth-of-type(#{$i}) {
+					left: calc($initPos + $width * ($i - 3));
+				}
+			}
+
+			/*
+			&:nth-of-type(3) {
+				left: calc($initPos + $width * 0);
+			}
+			&:nth-of-type(4) {
+				left: calc($initPos + $width * 1);
+			}
+			&:nth-of-type(5) {
+				left: calc($initPos + $width * 2);
+			}
+			&:nth-of-type(6) {
+				left: calc($initPos + $width * 3);
+			}
+			&:nth-of-type(7) {
+				left: calc($initPos + $width * 4);
+			}
+			&:nth-of-type(8) {
+				left: calc($initPos + $width * 5);
+			}
+      */
+		}
+	}
+
+	.navi {
+		position: absolute;
+		bottom: 5vh;
+		left: 50%;
+		z-index: 3;
+		color: #fff;
+	}
+}

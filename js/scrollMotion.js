@@ -12,11 +12,33 @@
 const sections = document.querySelectorAll('section');
 const list = document.querySelector('ul');
 const btns = list.querySelectorAll('li');
-const speed = 1000;
+const speed = 200;
 let preventEvent = true; // 모션 실행 중 여부
 
 window.addEventListener('scroll', activation);
 window.addEventListener('resize', modifyPos);
+window.addEventListener(
+	'mousewheel',
+	(e) => {
+		e.preventDefault(); // 깨끗하게 스크롤 되도록 처리
+
+		const active = list.querySelector('li.on');
+		const activeIdx = Array.from(btns).indexOf(active);
+
+		if (e.deltaY > 0) {
+			console.log('wheel down');
+
+			if (activeIdx === btns.length - 1) return;
+			moveScroll(activeIdx + 1);
+		} else {
+			console.log('wheel up');
+
+			if (activeIdx === 0) return;
+			moveScroll(activeIdx - 1);
+		}
+	},
+	{ passive: false }
+);
 
 btns.forEach((btn, idx) => {
 	btn.addEventListener('click', () => preventEvent && moveScroll(idx));

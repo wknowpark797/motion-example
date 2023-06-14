@@ -11,11 +11,17 @@
 
 const sections = document.querySelectorAll('section');
 const btns = document.querySelectorAll('ul li');
-const baseline = -window.innerHeight / 3;
 const speed = 1000;
 
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', activation);
+
+btns.forEach((btn, idx) => {
+	btn.addEventListener('click', () => moveScroll(idx));
+});
+
+function activation() {
 	const scroll = window.scrollY;
+	const baseline = -window.innerHeight / 3;
 
 	sections.forEach((_, idx) => {
 		if (scroll >= sections[idx].offsetTop + baseline) {
@@ -26,17 +32,15 @@ window.addEventListener('scroll', () => {
 			sections[idx].classList.add('on');
 		}
 	});
-});
+}
 
-btns.forEach((btn, idx) => {
-	btn.addEventListener('click', () => {
-		// scrollTo: 시간 제어 불가능
-		// window.scrollTo({ top: sections[idx].offsetTop, behavior: 'smooth' });
+function moveScroll(idx) {
+	// scrollTo: 시간 제어 불가능
+	// window.scrollTo({ top: sections[idx].offsetTop, behavior: 'smooth' });
 
-		new Anime(window, {
-			prop: 'scroll',
-			value: sections[idx].offsetTop,
-			duration: speed,
-		});
+	new Anime(window, {
+		prop: 'scroll',
+		value: sections[idx].offsetTop,
+		duration: speed,
 	});
-});
+}

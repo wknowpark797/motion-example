@@ -14,31 +14,16 @@ const list = document.querySelector('ul');
 const btns = list.querySelectorAll('li');
 const speed = 200;
 let preventEvent = true; // 모션 실행 중 여부
+let autoScroll = true; // auto scroll 실행 스위치
 
 window.addEventListener('scroll', activation);
 window.addEventListener('resize', modifyPos);
-window.addEventListener(
-	'mousewheel',
-	(e) => {
-		e.preventDefault(); // 깨끗하게 스크롤 되도록 처리
-
-		const active = list.querySelector('li.on');
-		const activeIdx = Array.from(btns).indexOf(active);
-
-		if (e.deltaY > 0) {
-			console.log('wheel down');
-
-			if (activeIdx === btns.length - 1) return;
-			moveScroll(activeIdx + 1);
-		} else {
-			console.log('wheel up');
-
-			if (activeIdx === 0) return;
-			moveScroll(activeIdx - 1);
-		}
-	},
-	{ passive: false }
-);
+autoScroll &&
+	window.addEventListener(
+		'mousewheel',
+		moveAuto, // 내부적으로 이벤트 객체가 전달된다.
+		{ passive: false } // 스크립트의 기본이벤트를 막을 수 있다. (e.preventDefault() 실행 가능)
+	);
 
 btns.forEach((btn, idx) => {
 	btn.addEventListener('click', () => preventEvent && moveScroll(idx));
@@ -80,4 +65,23 @@ function modifyPos() {
 
 	// scroll(가로 위치값, 세로 위치값) - 해당 위치로 바로 이동
 	window.scroll(0, sections[activeIdx].offsetTop);
+}
+
+function moveAuto(e) {
+	e.preventDefault(); // 깨끗하게 스크롤 되도록 처리
+
+	const active = list.querySelector('li.on');
+	const activeIdx = Array.from(btns).indexOf(active);
+
+	if (e.deltaY > 0) {
+		console.log('wheel down');
+
+		if (activeIdx === btns.length - 1) return;
+		moveScroll(activeIdx + 1);
+	} else {
+		console.log('wheel up');
+
+		if (activeIdx === 0) return;
+		moveScroll(activeIdx - 1);
+	}
 }

@@ -278,3 +278,48 @@ main {
 		opacity: 1;
 	}
 }
+
+@media screen and (max-width: 979px) {
+	// 변수가 적용되는 코드값이 함께 미디어쿼리에 활용 되어야 함
+	$initPos: 45%;
+	$width: 30vw;
+
+	main {
+		.list {
+			li {
+				width: $width;
+				left: $initPos;
+
+				@for $i from 0 through 5 {
+					&:nth-of-type(#{$i + 3}) {
+						left: calc($initPos + $width * $i);
+						transition-delay: 0.1s * $i;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 539px) {
+	$initPos: 20%;
+	$width: 50vw;
+
+	main {
+		.list {
+			li {
+				width: $width;
+				height: 160px;
+				top: 60%;
+				left: $initPos;
+
+				@for $i from 0 through 5 {
+					&:nth-of-type(#{$i + 3}) {
+						left: calc($initPos + $width * $i);
+						transition-delay: 0.1s * $i;
+					}
+				}
+			}
+		}
+	}
+}

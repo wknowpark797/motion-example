@@ -271,5 +271,67 @@ main .navi .next.on span {
     opacity: 1;
   }
 }
+@media screen and (max-width: 979px) {
+  main .list li {
+    width: 30vw;
+    left: 45%;
+  }
+  main .list li:nth-of-type(3) {
+    left: calc(45% + 0vw);
+    transition-delay: 0s;
+  }
+  main .list li:nth-of-type(4) {
+    left: calc(45% + 30vw);
+    transition-delay: 0.1s;
+  }
+  main .list li:nth-of-type(5) {
+    left: calc(45% + 60vw);
+    transition-delay: 0.2s;
+  }
+  main .list li:nth-of-type(6) {
+    left: calc(45% + 90vw);
+    transition-delay: 0.3s;
+  }
+  main .list li:nth-of-type(7) {
+    left: calc(45% + 120vw);
+    transition-delay: 0.4s;
+  }
+  main .list li:nth-of-type(8) {
+    left: calc(45% + 150vw);
+    transition-delay: 0.5s;
+  }
+}
+@media screen and (max-width: 539px) {
+  main .list li {
+    width: 50vw;
+    height: 160px;
+    top: 60%;
+    left: 20%;
+  }
+  main .list li:nth-of-type(3) {
+    left: calc(20% + 0vw);
+    transition-delay: 0s;
+  }
+  main .list li:nth-of-type(4) {
+    left: calc(20% + 50vw);
+    transition-delay: 0.1s;
+  }
+  main .list li:nth-of-type(5) {
+    left: calc(20% + 100vw);
+    transition-delay: 0.2s;
+  }
+  main .list li:nth-of-type(6) {
+    left: calc(20% + 150vw);
+    transition-delay: 0.3s;
+  }
+  main .list li:nth-of-type(7) {
+    left: calc(20% + 200vw);
+    transition-delay: 0.4s;
+  }
+  main .list li:nth-of-type(8) {
+    left: calc(20% + 250vw);
+    transition-delay: 0.5s;
+  }
+}
 
 /*# sourceMappingURL=loopListMotion.css.map */

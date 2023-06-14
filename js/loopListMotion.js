@@ -8,7 +8,7 @@ btnPrev.addEventListener('click', () => {
 	btnPrev.classList.add('on');
 	setTimeout(() => {
 		btnPrev.classList.remove('on');
-	}, 300);
+	}, 500);
 });
 
 btnNext.addEventListener('click', () => {
@@ -17,5 +17,5 @@ btnNext.addEventListener('click', () => {
 	btnNext.classList.add('on');
 	setTimeout(() => {
 		btnNext.classList.remove('on');
-	}, 300);
+	}, 500);
 });

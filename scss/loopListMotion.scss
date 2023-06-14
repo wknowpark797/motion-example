@@ -3,7 +3,6 @@
 $initPos: 40%;
 $width: 15vw;
 $height: 40vh;
-$length: 8;
 
 main {
 	width: 100%;
@@ -302,7 +301,7 @@ main {
 }
 
 @media screen and (max-width: 539px) {
-	$initPos: 20%;
+	$initPos: 20px;
 	$width: 50vw;
 
 	main {

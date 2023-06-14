@@ -2,6 +2,7 @@
 
 $initPos: 40%;
 $width: 15vw;
+$height: 40vh;
 $length: 8;
 
 main {
@@ -14,13 +15,14 @@ main {
 	.list {
 		li {
 			width: $width;
-			height: 40vh;
+			height: $height;
 			position: absolute;
 			top: 40%;
 			left: $initPos;
 			z-index: 3;
 			padding: 20px;
-			transition: 1s;
+			// cubic-bezier: 가속도 설정
+			transition: 1s cubic-bezier(0.29, -0.51, 0.42, 1);
 
 			.inner {
 				width: 100%;
@@ -91,30 +93,37 @@ main {
 				}
 			}
 
-			@for $i from 3 through $length {
-				&:nth-of-type(#{$i}) {
-					left: calc($initPos + $width * ($i - 3));
+			@for $i from 0 through 5 {
+				&:nth-of-type(#{$i + 3}) {
+					left: calc($initPos + $width * $i);
+					transition-delay: 0.1s * $i;
 				}
 			}
 
 			/*
 			&:nth-of-type(3) {
 				left: calc($initPos + $width * 0);
+				transition-delay: 0s;
 			}
 			&:nth-of-type(4) {
 				left: calc($initPos + $width * 1);
+				transition-delay: 0.1s;
 			}
 			&:nth-of-type(5) {
 				left: calc($initPos + $width * 2);
+				transition-delay: 0.2s;
 			}
 			&:nth-of-type(6) {
 				left: calc($initPos + $width * 3);
+				transition-delay: 0.3s;
 			}
 			&:nth-of-type(7) {
 				left: calc($initPos + $width * 4);
+				transition-delay: 0.4s;
 			}
 			&:nth-of-type(8) {
 				left: calc($initPos + $width * 5);
+				transition-delay: 0.5s;
 			}
       */
 		}
@@ -122,9 +131,92 @@ main {
 
 	.navi {
 		position: absolute;
-		bottom: 5vh;
-		left: 50%;
+		top: calc(40% + $height + 20px);
+		left: $initPos;
 		z-index: 3;
-		color: #fff;
+		padding-left: 20px;
+
+		.prev,
+		.next {
+			display: inline-block;
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			border: 1px solid #bbb;
+			margin-right: 20px;
+			position: relative;
+
+			&::before,
+			&::after {
+				content: '';
+				display: block;
+				width: 17px;
+				height: 1px;
+				background: #fff;
+				position: absolute;
+				top: 50%;
+			}
+
+			&::before {
+				transform: rotate(45deg) translateX(0);
+			}
+			&::after {
+				transform: rotate(-45deg) translateX(0);
+			}
+
+			span {
+				width: 20px;
+				height: 1px;
+				background: #fff;
+				position: absolute;
+				top: 50%;
+				opacity: 1;
+			}
+
+			&.on {
+				animation: wrap 0.3s 1;
+			}
+		}
+
+		.prev {
+			&::before,
+			&::after {
+				left: 25px;
+				// transform: 블록요소에 적용 가능
+				// transform-origin: 기준점 설정
+				transform-origin: left center;
+			}
+
+			span {
+				left: 25px;
+			}
+		}
+
+		.next {
+			&::before,
+			&::after {
+				right: 25px;
+				transform-origin: right center;
+			}
+
+			span {
+				right: 25px;
+			}
+		}
+	}
+}
+
+@keyframes wrap {
+	0% {
+		transform: scale(1);
+		border: 1px solid rgba(255, 255, 255, 1);
+	}
+	70% {
+		transform: scale(2);
+		border: 1px solid rgba(255, 255, 255, 0);
+	}
+	100% {
+		transform: scale(1);
+		border: 1px solid rgba(255, 255, 255, 1);
 	}
 }

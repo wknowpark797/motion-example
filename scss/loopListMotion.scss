@@ -22,7 +22,7 @@ main {
 			z-index: 3;
 			padding: 20px;
 			// cubic-bezier: 가속도 설정
-			transition: 1s cubic-bezier(0.29, -0.51, 0.42, 1);
+			transition: 1s cubic-bezier(0.48, -0.33, 0.51, 1.02);
 
 			.inner {
 				width: 100%;

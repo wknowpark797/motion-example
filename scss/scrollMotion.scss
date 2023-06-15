@@ -50,6 +50,45 @@ section {
 	}
 	&:nth-of-type(3) {
 		background: orange;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.svg-box {
+			width: 500px;
+			height: 500px;
+			border: 1px solid red;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			/*
+				[ path 모션 설정 방법 ]
+				1. 개발자 도구에서 stroke-dasharray 값을 계속 늘리면서 선이 완성되는 수치값을 파악 (가시영역의 길이 찾기)
+				2. 위의 수치값을 stroke-dasharray로 지정
+				3. 똑같은 수치값을 마이너스로 stroke-dashoffset에 지정
+				4. hover시 stroke-dashoffset값을 0으로 변경
+			*/
+			svg {
+				path {
+					fill: rgba(0, 0, 0, 0.3); // 색상 변경
+					stroke: #000; // 테두리
+					stroke-width: 5; // 테두리 굵기 - 배율 단위
+					stroke-linecap: round; // 단면을 둥글게
+					stroke-dasharray: 2730; // 선의 빈 간격 설정 (2730 : 가시영역의 길이)
+					stroke-dashoffset: -2730; // 가시영역의 기준점
+					transition: stroke-dashoffset 1s;
+				}
+			}
+
+			&:hover {
+				svg {
+					path {
+						stroke-dashoffset: 0;
+					}
+				}
+			}
+		}
 	}
 	&:nth-of-type(4) {
 		background: lightgreen;

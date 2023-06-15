@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
+  z-index: 2;
+}
+header h1 {
+  font: bold 30px/1 "arial";
+  color: #fff;
+}
+header #gnb {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+header #gnb li {
+  font: bold 16px/1 "arial";
+  color: #fff;
+}
+
+#visual {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+#visual .lower {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#visual .upper {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  opacity: 0.9;
+  clip-path: circle(390vh at 50% -300vh);
+}
+#visual .upper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*# sourceMappingURL=clipPathVisual.css.map */

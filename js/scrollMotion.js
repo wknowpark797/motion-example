@@ -16,6 +16,8 @@ const btns = list.querySelectorAll('li');
 const icon = document.querySelector('.svg-box path');
 const iconLength = 2730;
 
+const box = document.querySelector('.box');
+
 const baseline = -window.innerHeight / 3;
 const speed = 500;
 let preventEvent = true; // 모션 실행 중 여부
@@ -54,6 +56,7 @@ let eventBlocker = null; // 스크롤 이벤트 강제 제어
 window.addEventListener('scroll', () => {
 	// SVG 제어 - throttling 밖에 로직 추가 (path 모션을 부드럽게 실행하기 위함)
 	section3CustomScroll();
+	section4CustomScroll();
 
 	if (eventBlocker) return; // 처음 실행시 무시된다.
 	eventBlocker = setTimeout(() => {
@@ -138,10 +141,12 @@ function moveAuto(e) {
 	}
 }
 
+// 세번째 섹션 커스텀 함수
 function section3CustomScroll() {
 	const scroll = window.scrollY;
 
 	// 해당 섹션 영역에 도달했을 때 다시 0으로 보정된 스크롤값
+	// 전체 스크롤값에서 현재 스크롤 위치값을 뺀 보정값 * 5를 해서 선이 그려지는 수치폭을 5배 증가
 	let scroll2 = (scroll - sections[2].offsetTop - baseline) * 10;
 
 	// 해당 섹션에 스크롤이 도달하면
@@ -159,5 +164,21 @@ function section3CustomScroll() {
 	} else {
 		// 해당 섹션에서 스크롤이 벗어나게 되면 다시 strokeDashoffset값을 원래값으로 고정해서 초기화
 		icon.style.strokeDashoffset = iconLength;
+	}
+}
+
+// 네번째 섹션 커스텀 함수
+// 현재 크기에서 네번째 섹션에 도달하는 순간 .box가 점점 확대 되도록 처리
+// .box가 점점 투명해지면서 사라지도록 처리
+function section4CustomScroll() {
+	const scroll = window.scrollY;
+	let scroll2 = (scroll - sections[3].offsetTop - baseline) / 500;
+
+	if (scroll > sections[3].offsetTop + baseline) {
+		box.style.transform = `scale(${1 + scroll2}) rotate(${0 + scroll2 * 100}deg)`;
+		box.style.opacity = 1 - scroll2;
+	} else {
+		box.style.transform = `scale(1) rotate(0deg)`;
+		box.style.opacity = 1;
 	}
 }

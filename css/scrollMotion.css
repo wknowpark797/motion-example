@@ -92,6 +92,14 @@ section:nth-of-type(3) .svg-box:hover svg path {
 }
 section:nth-of-type(4) {
   background: lightgreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section:nth-of-type(4) .box {
+  width: 500px;
+  height: 500px;
+  background: #fff;
 }
 
 ul {

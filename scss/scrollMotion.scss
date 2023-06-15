@@ -76,7 +76,7 @@ section {
 					stroke-width: 5; // 테두리 굵기 - 배율 단위
 					stroke-linecap: round; // 단면을 둥글게
 					stroke-dasharray: 2730; // 선의 빈 간격 설정 (2730 : 가시영역의 길이)
-					stroke-dashoffset: -2730; // 가시영역의 기준점
+					stroke-dashoffset: 2730; // 가시영역의 기준점
 					transition: stroke-dashoffset 1s;
 				}
 			}

@@ -12,6 +12,11 @@
 const sections = document.querySelectorAll('section');
 const list = document.querySelector('ul');
 const btns = list.querySelectorAll('li');
+
+const icon = document.querySelector('.svg-box path');
+const iconLength = 2730;
+
+const baseline = -window.innerHeight / 3;
 const speed = 500;
 let preventEvent = true; // 모션 실행 중 여부
 let autoScroll = true; // auto scroll 실행 스위치
@@ -47,8 +52,10 @@ let eventBlocker = null; // 스크롤 이벤트 강제 제어
 }); */
 
 window.addEventListener('scroll', () => {
-	if (eventBlocker) return; // 처음 실행시 무시된다.
+	// SVG 제어 - throttling 밖에 로직 추가 (path 모션을 부드럽게 실행하기 위함)
+	section3CustomScroll();
 
+	if (eventBlocker) return; // 처음 실행시 무시된다.
 	eventBlocker = setTimeout(() => {
 		activation();
 		eventBlocker = null;
@@ -77,7 +84,6 @@ btns.forEach((btn, idx) => {
 
 function activation() {
 	const scroll = window.scrollY;
-	const baseline = -window.innerHeight / 3;
 
 	sections.forEach((_, idx) => {
 		if (scroll >= sections[idx].offsetTop + baseline) {
@@ -129,5 +135,29 @@ function moveAuto(e) {
 
 		if (activeIdx === 0) return;
 		moveScroll(activeIdx - 1);
+	}
+}
+
+function section3CustomScroll() {
+	const scroll = window.scrollY;
+
+	// 해당 섹션 영역에 도달했을 때 다시 0으로 보정된 스크롤값
+	let scroll2 = (scroll - sections[2].offsetTop - baseline) * 10;
+
+	// 해당 섹션에 스크롤이 도달하면
+	if (scroll > sections[2].offsetTop + baseline) {
+		// scroll2값이 만약 전체 선의 길이를 넘어가는 순간 값을 0으로 강제 고정
+		// -> 반대방향으로 빠지게 되기 때문
+		if (scroll2 >= iconLength) {
+			scroll2 = iconLength;
+		}
+
+		// 세번째 섹션에 도달하는 순간의 scroll 값이 0이 되어야 하므로 해당 세로 위치값을 빼준다.
+		// 아이콘의 strokeDashoffset값을 보정된 scroll2값으로 계속 빼준다. (선이 그어지기 시작)
+		// 위의 조건식에서 만들어진 scroll2 값이 아래의 코드에서 활용되어야 하므로 순서 변경 금지
+		icon.style.strokeDashoffset = iconLength - scroll2;
+	} else {
+		// 해당 섹션에서 스크롤이 벗어나게 되면 다시 strokeDashoffset값을 원래값으로 고정해서 초기화
+		icon.style.strokeDashoffset = iconLength;
 	}
 }

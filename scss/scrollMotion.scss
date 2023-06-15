@@ -55,8 +55,8 @@ section {
 		align-items: center;
 
 		.svg-box {
-			width: 500px;
-			height: 500px;
+			width: 700px;
+			height: 700px;
 			border: 1px solid red;
 			display: flex;
 			justify-content: center;
@@ -73,21 +73,21 @@ section {
 				path {
 					fill: rgba(0, 0, 0, 0.3); // 색상 변경
 					stroke: #000; // 테두리
-					stroke-width: 5; // 테두리 굵기 - 배율 단위
+					stroke-width: 10; // 테두리 굵기 - 배율 단위
 					stroke-linecap: round; // 단면을 둥글게
 					stroke-dasharray: 2730; // 선의 빈 간격 설정 (2730 : 가시영역의 길이)
 					stroke-dashoffset: 2730; // 가시영역의 기준점
-					transition: stroke-dashoffset 1s;
+					// transition: stroke-dashoffset 1s;
 				}
 			}
 
-			&:hover {
-				svg {
-					path {
-						stroke-dashoffset: 0;
-					}
-				}
-			}
+			// &:hover {
+			// 	svg {
+			// 		path {
+			// 			stroke-dashoffset: 0;
+			// 		}
+			// 	}
+			// }
 		}
 	}
 	&:nth-of-type(4) {
